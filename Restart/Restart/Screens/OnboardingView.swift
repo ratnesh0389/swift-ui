@@ -16,6 +16,8 @@ struct OnboardingView: View {
     @State private var buttonOffSet: CGFloat = 0
     
     @State private var isAnimating: Bool = false
+    @State private var imageOffSet: CGSize = .zero
+//    @State private var imageOffSet: CGSize = CGSize(width: 0, height: 0)
     
     // MARK: Body
     var body: some View {
@@ -55,7 +57,20 @@ struct OnboardingView: View {
                         .resizable()
                         .scaledToFit()
                         .opacity(isAnimating ? 1 : 0)
-                        .animation(.easeOut(duration: 0.25), value: isAnimating)
+                        .animation(.easeOut(duration: 0.5), value: isAnimating)
+                        .offset(x: imageOffSet.width * 1.2, y: 0)
+                        .rotationEffect(.degrees(Double(imageOffSet.width / 20))) //Add image rotations in degree.
+                        .gesture(DragGesture()
+                            .onChanged { gesture in
+                                if abs(imageOffSet.width) <= 150 {
+                                    imageOffSet = gesture.translation
+                                }
+                            }
+                            .onEnded{_ in
+                                imageOffSet = .zero
+                            }
+                        )//:Gesture
+                        .animation(.easeOut(duration: 1), value: imageOffSet)
                 } //:CENTER
 
                 Spacer()
