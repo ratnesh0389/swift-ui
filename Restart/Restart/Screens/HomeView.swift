@@ -12,14 +12,43 @@ struct HomeView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Home")
-                .font(.largeTitle)
-            Button(action: {
-                //TODO:
-                isOnboardedViewActive = true
-            }) {
+            // MARK : - Header
+            
+            Spacer()
+            
+            Image("character-2")
+                .resizable()
+                .scaledToFit()
+                .padding()
+            
+            // MARK : - Center
+            
+            Text("The time that leads to mastry is dependt on the intenseity of our focus")
+                .font(.title3)
+                .fontWeight(.light)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+                .padding()
+            
+            // MARK : - Footer
+            
+            Spacer()
+            
+            Button {
+                //Action
+            } label: {
+                Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                    .imageScale(.large)
                 Text("Restart")
-            }
+                    .font(.system(.title3, design: .rounded))
+                    .fontWeight(.bold)
+            }//:Button
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
+//            .padding()
+
+            
             
         }
         
