@@ -17,7 +17,8 @@ struct OnboardingView: View {
     
     @State private var isAnimating: Bool = false
     @State private var imageOffSet: CGSize = .zero
-//    @State private var imageOffSet: CGSize = CGSize(width: 0, height: 0)
+    @State private var indicatorOpacity: Double = 1.0
+    @State private var textTitle: String = "Share."
     
     // MARK: Body
     var body: some View {
@@ -31,10 +32,13 @@ struct OnboardingView: View {
                 Spacer()
                 
                 VStack(spacing: 0) {
-                    Text("Share")
+                    Text(textTitle)
                         .font(.system(size: 60))
                         .fontWeight(.heavy)
                         .foregroundColor(.white)
+                        .transition(.opacity)
+                        .id(textTitle)
+                    
                     Text("""
                     It's not how much we give but
                     how much love we put into giving.
@@ -52,7 +56,12 @@ struct OnboardingView: View {
                 //MARK: Center
                 
                 ZStack {
-                    CircleGroupView(ShapeColor: .white, ShapeOpacity: 0.2)
+                    CircleGroupView(ShapeColor: .white, ShapeOpacity: 0.2) //Add parallax effect.
+                        .offset(x: imageOffSet.width * -1) // -1 for opposit direction.
+                        .blur(radius: abs(imageOffSet.width / 5))
+                        .animation(.easeOut(duration: 1), value: imageOffSet)
+                    
+                    
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
@@ -64,14 +73,32 @@ struct OnboardingView: View {
                             .onChanged { gesture in
                                 if abs(imageOffSet.width) <= 150 {
                                     imageOffSet = gesture.translation
+                                    withAnimation(.linear(duration: 0.25)) {
+                                        indicatorOpacity = 0
+                                        textTitle = "Give."
+                                    }
                                 }
                             }
                             .onEnded{_ in
                                 imageOffSet = .zero
+                                withAnimation(.linear(duration: 0.25)) {
+                                    indicatorOpacity = 1
+                                    textTitle = "Share."
+                                }
                             }
                         )//:Gesture
                         .animation(.easeOut(duration: 1), value: imageOffSet)
                 } //:CENTER
+                .overlay(
+                    Image(systemName: "arrow.left.and.right.circle")
+                        .font(.system(size: 44, weight: .ultraLight))
+                        .foregroundColor(.white)
+                        .offset(y: 20)
+                        .opacity(isAnimating ? 1 : 0)
+                        .animation(.easeOut(duration: 1).delay(2), value: isAnimating)
+                        .opacity(indicatorOpacity)
+                    ,alignment: .bottom
+                )
 
                 Spacer()
 
