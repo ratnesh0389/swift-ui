@@ -11,6 +11,10 @@ struct OnboardingView: View {
     // MARK: Property
     
     @AppStorage("onboarding") var isOnboardedViewActive: Bool = true
+    
+    @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
+    @State private var buttonOffSet: CGFloat = 0
+    
     // MARK: Body
     var body: some View {
         ZStack {
@@ -75,7 +79,7 @@ struct OnboardingView: View {
                     HStack {
                         Capsule()
                             .fill(Color("ColorRed"))
-                            .frame(width: 80)
+                            .frame(width: buttonOffSet + 80)
                         
                         Spacer()
                     }
@@ -93,14 +97,29 @@ struct OnboardingView: View {
                         }
                         .foregroundColor(.white)
                     .frame(width: 80, height: 80, alignment: .center)
-                    .onTapGesture {
-                        isOnboardedViewActive = false
-                    }
+                    .offset(x: buttonOffSet)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { gesture in
+                                if gesture.translation.width > 0 && buttonOffSet <= buttonWidth - 80 {
+                                    buttonOffSet = gesture.translation.width
+                                }
+                            }
+                            .onEnded {_ in
+                                if buttonOffSet > buttonWidth / 2 {
+                                    buttonOffSet = buttonWidth - 80
+                                    isOnboardedViewActive = false
+                                } else {
+                                    buttonOffSet = 0
+                                }
+                                
+                            }
+                    )//: GESTURE
                         
                         Spacer()
                     }//:HSTACK
                     
-                }.frame(height: 80, alignment: .center)
+                }.frame(width: buttonWidth, height: 80, alignment: .center)
                     .padding()
                 
             }//:VSTACK
