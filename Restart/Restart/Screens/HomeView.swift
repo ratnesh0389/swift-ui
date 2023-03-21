@@ -16,10 +16,13 @@ struct HomeView: View {
             
             Spacer()
             
-            Image("character-2")
-                .resizable()
-                .scaledToFit()
+            ZStack {
+                CircleGroupView(ShapeColor: .gray, ShapeOpacity: 0.1)
+                Image("character-2")
+                    .resizable()
+                    .scaledToFit()
                 .padding()
+            }
             
             // MARK : - Center
             
@@ -36,6 +39,7 @@ struct HomeView: View {
             
             Button {
                 //Action
+                isOnboardedViewActive = true
             } label: {
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                     .imageScale(.large)
@@ -46,10 +50,6 @@ struct HomeView: View {
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.capsule)
             .controlSize(.large)
-//            .padding()
-
-            
-            
         }
         
     }
