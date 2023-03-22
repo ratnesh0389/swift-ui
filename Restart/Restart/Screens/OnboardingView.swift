@@ -20,6 +20,8 @@ struct OnboardingView: View {
     @State private var indicatorOpacity: Double = 1.0
     @State private var textTitle: String = "Share."
     
+    let hepticFeedback = UINotificationFeedbackGenerator()
+    
     // MARK: Body
     var body: some View {
         ZStack {
@@ -157,9 +159,14 @@ struct OnboardingView: View {
                             .onEnded {_ in
                                 withAnimation(Animation.easeOut(duration: 0.4)) {
                                     if buttonOffSet > buttonWidth / 2 {
+
+                                        hepticFeedback.notificationOccurred(.success)
+                                        
+                                        playSound(sound: "chimeup", type: "mp3")
                                         buttonOffSet = buttonWidth - 80
                                         isOnboardedViewActive = false
                                     } else {
+                                        hepticFeedback.notificationOccurred(.warning)
                                         buttonOffSet = 0
                                     }
                                 }
@@ -180,6 +187,7 @@ struct OnboardingView: View {
         .onAppear(perform: {
             isAnimating = true
         })
+        .preferredColorScheme(.dark) // want to use dark color schema.
     }
 }
 
@@ -188,3 +196,6 @@ struct OnboardingView_Previews: PreviewProvider {
         OnboardingView()
     }
 }
+
+//Audio player
+
