@@ -14,6 +14,7 @@
 		7E2C9AF529D019EA00073C4B /* AppleSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C9AF429D019EA00073C4B /* AppleSwiftUITests.swift */; };
 		7E2C9AFF29D019EA00073C4B /* AppleSwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C9AFE29D019EA00073C4B /* AppleSwiftUIUITests.swift */; };
 		7E2C9B0129D019EA00073C4B /* AppleSwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C9B0029D019EA00073C4B /* AppleSwiftUIUITestsLaunchTests.swift */; };
+		7E2C9B0F29D0210700073C4B /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C9B0E29D0210700073C4B /* CircleImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		7E2C9AFA29D019EA00073C4B /* AppleSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E2C9AFE29D019EA00073C4B /* AppleSwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSwiftUIUITests.swift; sourceTree = "<group>"; };
 		7E2C9B0029D019EA00073C4B /* AppleSwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7E2C9B0E29D0210700073C4B /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				7E2C9AE329D019E900073C4B /* AppleSwiftUIApp.swift */,
-				7E2C9AE529D019E900073C4B /* ContentView.swift */,
+				7E2C9B0D29D020DD00073C4B /* Screen */,
 				7E2C9AE729D019EA00073C4B /* Assets.xcassets */,
 				7E2C9AE929D019EA00073C4B /* Preview Content */,
 			);
@@ -125,6 +127,15 @@
 				7E2C9B0029D019EA00073C4B /* AppleSwiftUIUITestsLaunchTests.swift */,
 			);
 			path = AppleSwiftUIUITests;
+			sourceTree = "<group>";
+		};
+		7E2C9B0D29D020DD00073C4B /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				7E2C9AE529D019E900073C4B /* ContentView.swift */,
+				7E2C9B0E29D0210700073C4B /* CircleImageView.swift */,
+			);
+			path = Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E2C9AE629D019E900073C4B /* ContentView.swift in Sources */,
+				7E2C9B0F29D0210700073C4B /* CircleImageView.swift in Sources */,
 				7E2C9AE429D019E900073C4B /* AppleSwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
