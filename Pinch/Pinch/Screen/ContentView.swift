@@ -78,6 +78,57 @@ struct ContentView: View {
                 
                 , alignment: .top
             )
+            
+            // MARK: - Controle.
+            .overlay(
+                Group{
+                    HStack {
+                        //Scale DOWN
+                        Button {
+                            withAnimation(.spring()) {
+                                if imageScale > 1 {
+                                    imageScale -= 1
+                                    
+                                    if imageScale <= 1 {
+                                        resetImageState()
+                                    }
+                                }
+                            }
+                            
+                        } label: {
+                             ControleImageView(icon: "minus.magnifyingglass")
+                        }
+                        // RESET
+                        Button {
+                           resetImageState()
+                        } label: {
+                             ControleImageView(icon: "arrow.up.left.and.down.right.magnifyingglass")
+                        }
+                        
+                        // SCALE UP
+                        Button {
+                            withAnimation(.spring()) {
+                                if imageScale < 5 {
+                                    imageScale += 1
+                                    
+                                    if imageScale > 5 {
+                                        imageScale = 5
+                                    }
+                                }
+                            }
+                        } label: {
+                             ControleImageView(icon: "plus.magnifyingglass")
+                        }
+                    }
+                    .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(12)
+                    .opacity(isAnimating ? 1 : 0)
+                } //Controle
+                    .padding(.bottom, 30)
+                
+                , alignment: .bottom
+            )
         }//:NAVIGATION
         .navigationViewStyle(.stack)
     }
