@@ -16,19 +16,43 @@ struct ContentView: View {
         //To customize a SwiftUI view, you call methods called modifiers.
     
         VStack(alignment: .leading){
-            Text("Turtle Rock!")
-                    .font(.title)
-            HStack {
-                Text("Joshua Tree National Park!")
-                    .font(.subheadline)
+            MapView()
+                .frame(height: 300)
+                .ignoresSafeArea(edges: .top)
+            
+            CircleImageView()
+                .offset(y: -130)
+                .padding(.bottom, -130)
+
+            VStack(alignment: .leading) {
                 
-                Spacer()
+                    Text("Turtle Rock!")
+                        .font(.title)
                 
-                Text("California")
-                    .font(.subheadline)
+                HStack {
+                    Text("Joshua Tree National Park!")
+                        .font(.subheadline)
+                    
+                    Spacer()
+                    
+                    Text("California")
+                        .font(.subheadline)
+                }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+
+                Divider()
+                
+                Text("About Turtle Rock")
+                    .font(.title2)
+                Text("Descriptive text goes here.")
+                
             }
+            .padding()
+            
+            Spacer()
         }
-        .padding()
     }
 }
 

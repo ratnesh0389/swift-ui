@@ -48,7 +48,7 @@ struct ContentView: View {
                             resetImageState()
                         }
                     }
-                // MARK : 2. Drag gesture
+                // MARK: 2. Drag gesture
                     .gesture(
                         DragGesture()
                             .onChanged({ value in
@@ -62,6 +62,29 @@ struct ContentView: View {
                                 }
                             })
                     )
+                
+                // MARK: 3. Magnification
+                    .gesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                withAnimation(.linear(duration: 1)) {
+                                    if imageScale >= 1 && imageScale <= 5 {
+                                        imageScale = value
+                                    } else if imageScale > 5 {
+                                        imageScale = 5
+                                    }
+                                }
+                            }
+                            .onEnded { _ in
+                                if imageScale > 5 {
+                                    imageScale = 5
+                                } else if imageScale <= 1 {
+                                    resetImageState()
+                                }
+                                
+                            }
+                    )
+                
             }//ZSTACK
             .navigationTitle("Pinch & Zoom")
             .navigationBarTitleDisplayMode(.inline)
@@ -129,11 +152,37 @@ struct ContentView: View {
                 
                 , alignment: .bottom
             )
+            
+            // MARK: - Drawer
+            .overlay(
+                HStack (spacing: 12){
+                    // MARK: - Drwwer Handle
+                    Image(systemName: "chevron.compact.left")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 40)
+                        .padding(8)
+                        .foregroundStyle(.secondary)
+                    
+                    Spacer()
+                    
+                    // MARK: - Thumbnails
+                    
+                }//Drawer
+                    .padding(EdgeInsets(top: 16, leading: 8, bottom: 16, trailing: 8))
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(12)
+                    .opacity(isAnimating ? 1 : 0)
+                  .frame(width: 260)
+                  .padding(.top, UIScene.main.bounds.height / 12)
+                , alignment: .topTrailing
+            )
         }//:NAVIGATION
         .navigationViewStyle(.stack)
     }
 }
 
+// MARK: - Previews
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
